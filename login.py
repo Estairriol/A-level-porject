@@ -13,8 +13,9 @@ password VARCHAR(20) NOT NULL);
 ''' #This is for me to remember what each field is
 
 class Login(): #this manages the login page
-	def __init__(self, window): #this sets up the page and the buttons
-		self.window = window
+	def __init__(self, window, manager): #this sets up the page and the buttons 
+		self.window = window #this allows us to make changes to the window
+		self.manager = manager #this allows us to communicate to the manager in main
 
 		#giving the title
 		self.title = tk.Label(self.window, text="Login", font=("Roboto", 20, "bold"))
@@ -49,7 +50,7 @@ class Login(): #this manages the login page
 			cursor = db.cursor() #this cursor will be used to query the database
 
 		#gets the values in boxes
-		username = self.userNameEnt.get()
+		username = self.userNameEnt.get().lower()
 		password = self.passwordEnt.get()
 		print(username, password)
 
@@ -57,7 +58,9 @@ class Login(): #this manages the login page
 		cursor.execute(query, (username, password)) #this query will check the database for the username and password
 		results = cursor.fetchall() #this returns the results of the query
 		if results:
-			print ("yay")
-			 x=0#user is verified (placeholder)
+			print("access granted")
+			user = results[0][0]
+			self.manager.succesfullLogin(user)
 		else:
 			x=1 #attempts += 1 #im not sure whether i want attempts yet.
+			#might make text boxes red?
