@@ -12,10 +12,10 @@ surname VARCHAR(20) NOT NULL,
 password VARCHAR(20) NOT NULL);
 ''' #This is for me to remember what each field is
 
-class Login(tk.Frame): #this manages the login page tk.frame is inherited so that the class can use self as a frame and the class itself is a frame
+class Login(tk.Frame): #this manages the login page, tk.frame is inherited so that the class can use self as a frame and the class itself is a frame
 	def __init__(self, manager): #this sets up the page and the buttons 
-		tk.Frame.__init__(self, manager)
-		self.manager = manager
+		tk.Frame.__init__(self, manager) #this initialises the class as a frame
+		self.manager = manager #allows the class to communicate with the manager
 
 		#giving the title
 		self.title = tk.Label(self, text="Login", font=("Roboto", 20, "bold"))
