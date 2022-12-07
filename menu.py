@@ -1,5 +1,8 @@
 import tkinter as tk
+from home import Home
 
-class menu(tk.Menu)
+class Menu(tk.Menu):
 	def __init__(self, manager):
-		tk.Menu.__init__(self, Manager)
+		tk.Menu.__init__(self, manager)
+		
+		self.add_command(label = "Home", command = manager.switchPage(Home))

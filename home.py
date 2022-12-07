@@ -4,3 +4,6 @@ class Home(tk.Frame):
 	def __init__(self, manager):
 		tk.Frame.__init__(self, manager) #initialises the frame
 		self.manager = manager #this allows us to communicate to the manager in main
+
+		self.label = tk.Label(self, text="Home")
+		self.label.pack()

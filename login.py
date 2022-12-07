@@ -1,4 +1,5 @@
 import tkinter as tk, sys, os, time, sqlite3 #not all of these are used yet but they are universal to the project and so are imported in all files
+from menu import Menu #this is the menu
 
 def doNothing(): #placeholder
 	pass
@@ -16,6 +17,8 @@ class Login(tk.Frame): #this manages the login page, tk.frame is inherited so th
 	def __init__(self, manager): #this sets up the page and the buttons 
 		tk.Frame.__init__(self, manager) #this initialises the class as a frame
 		self.manager = manager #allows the class to communicate with the manager
+
+		#self.menu = Menu(self)
 
 		#giving the title
 		self.title = tk.Label(self, text="Login", font=("Roboto", 20, "bold"))
@@ -60,7 +63,7 @@ class Login(tk.Frame): #this manages the login page, tk.frame is inherited so th
 		if results:
 			print("access granted")
 			user = results[0][0]
-			self.manger.succesfullLogin(user)
+			self.manager.succesfullLogin(user)
 		else:
 			x=1 #attempts += 1 #im not sure whether i want attempts yet.
 			#might make text boxes red?
