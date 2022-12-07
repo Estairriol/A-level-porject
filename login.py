@@ -12,31 +12,31 @@ surname VARCHAR(20) NOT NULL,
 password VARCHAR(20) NOT NULL);
 ''' #This is for me to remember what each field is
 
-class Login(): #this manages the login page
-	def __init__(self, window, manager): #this sets up the page and the buttons 
-		self.window = window #this allows us to make changes to the window
-		self.manager = manager #this allows us to communicate to the manager in main
+class Login(tk.Frame): #this manages the login page tk.frame is inherited so that the class can use self as a frame and the class itself is a frame
+	def __init__(self, manager): #this sets up the page and the buttons 
+		tk.Frame.__init__(self, manager)
+		self.manager = manager
 
 		#giving the title
-		self.title = tk.Label(self.window, text="Login", font=("Roboto", 20, "bold"))
+		self.title = tk.Label(self, text="Login", font=("Roboto", 20, "bold"))
 		self.title.grid(row=0, column=0, columnspan=3)
 
 		#creating the username entry box
-		self.userNameLbl = tk.Label(text="Username:")
-		self.userNameEnt = tk.Entry(width=20)
+		self.userNameLbl = tk.Label(self, text="Username:")
+		self.userNameEnt = tk.Entry(self, width=20)
 		self.userNameLbl.grid(row=1, column=0, sticky="e")
 		self.userNameEnt.grid(row=1, column=1)
 
 		#creating the password entry box
-		self.passwordLbl = tk.Label(text="Password:")
-		self.passwordEnt = tk.Entry(width=20)
+		self.passwordLbl = tk.Label(self, text="Password:")
+		self.passwordEnt = tk.Entry(self, width=20)
 		self.passwordEnt.config(show="*")
 		self.passwordLbl.grid(row=2, column=0, sticky="e")
 		self.passwordEnt.grid(row=2, column=1)
 
 		#creating the buttons at the bottom
-		self.submitBtn = tk.Button(text="Submit", command=self.submit)
-		self.clearBtn = tk.Button(text="Clear", command=self.clear)
+		self.submitBtn = tk.Button(self, text="Submit", command=self.submit)
+		self.clearBtn = tk.Button(self, text="Clear", command=self.clear)
 		self.submitBtn.grid(row=3, column=2, sticky="e")
 		self.clearBtn.grid(row=3, column=1, sticky="e")
 
@@ -60,7 +60,7 @@ class Login(): #this manages the login page
 		if results:
 			print("access granted")
 			user = results[0][0]
-			self.manager.succesfullLogin(user)
+			self.manger.succesfullLogin(user)
 		else:
 			x=1 #attempts += 1 #im not sure whether i want attempts yet.
 			#might make text boxes red?
