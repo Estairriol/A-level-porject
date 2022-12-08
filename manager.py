@@ -17,7 +17,7 @@ class Manager(tk.Tk): #this manages all of the pages
 		self.menu = Menu(self) #initialises the menu
 		self.configure(menu = self.menu) #and attaches it to the window
 
-		self.bind("<Return>", self.handleKeyPress) #allows key pressestp be used
+		self.bind("<Return>", self.handleReturnPress) #allows key pressestp be used
 		
 		self.switchPage(Login) #Always use the switchpage method to change the page
 		
@@ -29,8 +29,7 @@ class Manager(tk.Tk): #this manages all of the pages
 		self.frame = newFrame 
 		self.frame.grid(row=0, column=0) #places the new frame
 	
-	def handleKeyPress(self, event):
-		print(event.char)
+	def handleReturnPress(self, event): #this means that when enter is pressed, the deets are checked
 		if self.frame.type == "login":
 			self.frame.submit()
 		
@@ -40,4 +39,4 @@ class Manager(tk.Tk): #this manages all of the pages
 		self.switchPage(Home)
 	
 	def goHome(self):
-		self.switchPage(Home)
+		self.switchPage(Home)#this is so that the menu can use this method to switch windows
