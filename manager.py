@@ -16,6 +16,8 @@ class Manager(tk.Tk): #this manages all of the pages
 
 		self.menu = Menu(self) #initialises the menu
 		self.configure(menu = self.menu) #and attaches it to the window
+
+		self.bind("<Return>", self.handleKeyPress) #allows key pressestp be used
 		
 		self.switchPage(Login) #Always use the switchpage method to change the page
 		
@@ -26,6 +28,11 @@ class Manager(tk.Tk): #this manages all of the pages
 			self.frame.destroy() #destroys the old one
 		self.frame = newFrame 
 		self.frame.grid(row=0, column=0) #places the new frame
+	
+	def handleKeyPress(self, event):
+		print(event.char)
+		if self.frame.type == "login":
+			self.frame.submit()
 		
 	def succesfullLogin(self, user): #this handles the case when the user succesfully logs in
 		self.loggedIn = True

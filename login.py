@@ -17,6 +17,7 @@ class Login(tk.Frame): #this manages the login page, tk.frame is inherited so th
 	def __init__(self, manager): #this sets up the page and the buttons 
 		tk.Frame.__init__(self, manager) #this initialises the class as a frame
 		self.manager = manager #allows the class to communicate with the manager
+		self.type = "login"
 
 		#giving the title
 		self.title = tk.Label(self, text="Login", font=("Roboto", 20, "bold"))
@@ -65,3 +66,5 @@ class Login(tk.Frame): #this manages the login page, tk.frame is inherited so th
 		else:
 			x=1 #attempts += 1 #im not sure whether i want attempts yet.
 			#might make text boxes red?
+
+	
