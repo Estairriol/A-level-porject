@@ -14,19 +14,18 @@ class Manager(tk.Tk): #this manages all of the pages
 		self.loggedIn = False #i could use self.user for this and check if it is not none
 		self.page = None #This keeps track of the current page
 
-		self.menu = Menu(self)
-		#self.menu.grid(row=0, column=0)
+		self.menu = Menu(self) #initialises the menu
+		self.configure(menu = self.menu) #and attaches it to the window
 		
 		self.switchPage(Login) #Always use the switchpage method to change the page
 		
-		self.mainloop() #This is basically a while loop that runs forever and updates functions whenever needed
 
 	def switchPage(self, newPage): #This function switches the page to the new page
-		newFrame = newPage(self)
+		newFrame = newPage(self) #creates the new frame
 		if self.frame is not None:
-			self.frame.destroy()
-		self.frame = newFrame
-		self.frame.grid(row=1, column=0)
+			self.frame.destroy() #destroys the old one
+		self.frame = newFrame 
+		self.frame.grid(row=0, column=0) #places the new frame
 		
 	def succesfullLogin(self, user): #this handles the case when the user succesfully logs in
 		self.loggedIn = True

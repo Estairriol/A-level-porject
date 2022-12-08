@@ -18,8 +18,6 @@ class Login(tk.Frame): #this manages the login page, tk.frame is inherited so th
 		tk.Frame.__init__(self, manager) #this initialises the class as a frame
 		self.manager = manager #allows the class to communicate with the manager
 
-		#self.menu = Menu(self)
-
 		#giving the title
 		self.title = tk.Label(self, text="Login", font=("Roboto", 20, "bold"))
 		self.title.grid(row=0, column=0, columnspan=3)
