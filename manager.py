@@ -31,3 +31,6 @@ class Manager(tk.Tk): #this manages all of the pages
 		self.loggedIn = True
 		self.user = user
 		self.switchPage(Home)
+	
+	def goHome(self):
+		self.switchPage(Home)
