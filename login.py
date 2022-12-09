@@ -36,11 +36,14 @@ class Login(tk.Frame): #this manages the login page, tk.frame is inherited so th
 		self.passwordLbl.grid(row=2, column=0, sticky="e")
 		self.passwordEnt.grid(row=2, column=1)
 
+		self.feedback = tk.Label(self)#allows to tell user when password is wrong
+		self.feedback.grid(row=3, column=1)
+
 		#creating the buttons at the bottom
 		self.submitBtn = tk.Button(self, text="Submit", command=self.submit)
 		self.clearBtn = tk.Button(self, text="Clear", command=self.clear)
-		self.submitBtn.grid(row=3, column=2, sticky="e")
-		self.clearBtn.grid(row=3, column=1, sticky="e")
+		self.submitBtn.grid(row=4, column=2, sticky="e")
+		self.clearBtn.grid(row=4, column=1, sticky="e")
 
 	def clear(self): #this clears the username and password fields
 		self.userNameEnt.delete(0, tk.END)
@@ -64,7 +67,5 @@ class Login(tk.Frame): #this manages the login page, tk.frame is inherited so th
 			user = results[0][0]
 			self.manager.succesfullLogin(user)
 		else:
-			x=1 #attempts += 1 #im not sure whether i want attempts yet.
-			#might make text boxes red?
-
-	
+			self.passwordEnt.delete(0, tk.END) #removing the incorrect password from the box
+			self.feedback.config(text = "Incorrect Username\nOr Password", fg = "red")

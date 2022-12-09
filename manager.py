@@ -20,6 +20,8 @@ class Manager(tk.Tk): #this manages all of the pages
 		self.bind("<Return>", self.handleReturnPress) #allows key pressestp be used
 		
 		self.switchPage(Login) #Always use the switchpage method to change the page
+
+		self.minsize(250, 150)
 		
 
 	def switchPage(self, newPage): #This function switches the page to the new page
@@ -27,7 +29,10 @@ class Manager(tk.Tk): #this manages all of the pages
 		if self.frame is not None:
 			self.frame.destroy() #destroys the old one
 		self.frame = newFrame 
-		self.frame.grid(row=0, column=0) #places the new frame
+		self.frame.pack() #places the new frame
+
+		minWidth = self.frame.winfo_height()
+		print(minWidth)
 	
 	def handleReturnPress(self, event): #this means that when enter is pressed, the deets are checked
 		if self.frame.type == "login":

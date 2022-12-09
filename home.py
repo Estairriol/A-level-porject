@@ -6,5 +6,19 @@ class Home(tk.Frame):
 		self.manager = manager #this allows us to communicate to the manager in main
 		self.type = "home"
 
-		self.label = tk.Label(self, text="Home")
-		self.label.pack()
+		self.title = tk.Label(self, text="Home", font=("Roboto", 20, "bold")) #Gives the page a title
+		self.title.grid(row=0, column=0, columnspan=2)
+
+		self.nameEnt = tk.Entry(self)#where they will search for students
+		self.nameEnt.insert(0, "Enter students name:")
+		self.nameEnt.grid(row=1, column=0)
+		self.nameEnt.bind("<FocusIn>", self.clear)#clears the box when clicked on
+
+		self.submitBtn = tk.Button(self, text="Submit", command=self.submit)
+		self.submitBtn.grid(row=1, column=1, sticky="e")
+
+	def submit(self):
+		x=1
+	
+	def clear(self, e):
+		self.nameEnt.delete(0, tk.END)
