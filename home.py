@@ -24,7 +24,7 @@ class Home(tk.Frame):
 		criteria = self.nameEnt.get()
 		print(criteria)
 
-		with sqlite3.connect("data.db") as db: #this allows me to connect to the database
+		with sqlite3.connect("data/data.db") as db: #this allows me to connect to the database
 			cursor = db.cursor() #this cursor will be used to query the database
 
 		query = """SELECT * FROM students WHERE name = ?; """

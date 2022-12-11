@@ -51,7 +51,7 @@ class Login(tk.Frame): #this manages the login page, tk.frame is inherited so th
 	
 	def submit(self): #this handles the submit button and checks agains database
 		
-		with sqlite3.connect("data.db") as db: #this allows me to connect to the database
+		with sqlite3.connect("data/data.db") as db: #this allows me to connect to the database
 			cursor = db.cursor() #this cursor will be used to query the database
 
 		#gets the values in boxes
