@@ -16,9 +16,19 @@ class Home(tk.Frame):
 
 		self.submitBtn = tk.Button(self, text="Submit", command=self.submit)
 		self.submitBtn.grid(row=1, column=1, sticky="e")
-
-	def submit(self):
-		x=1
 	
 	def clear(self, e):
 		self.nameEnt.delete(0, tk.END)
+
+	def submit(self):
+		criteria = self.nameEnt.get()
+		print(criteria)
+
+		with sqlite3.connect("data.db") as db: #this allows me to connect to the database
+			cursor = db.cursor() #this cursor will be used to query the database
+
+		query = """SELECT * FROM students WHERE name = ?; """
+
+		cursor.execute(query, (criteria,))
+		names = cursor.fetchall()
+		print(names)
