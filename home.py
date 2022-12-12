@@ -14,10 +14,12 @@ class Home(tk.Frame):
 		self.nameEnt.grid(row=1, column=0)
 		self.nameEnt.bind("<FocusIn>", self.clear)#clears the box when clicked on
 
-		self.submitBtn = tk.Button(self, text="Submit", command=self.submit)
-		self.submitBtn.grid(row=1, column=1, sticky="e")
+		self.clearBtn = tk.Button(self, text="Clear", command=self.clear)
+		self.clearBtn.grid(row=1, column=1, sticky="e")
+
+		self.submit()
 	
-	def clear(self, e):
+	def clear(self, e=None): #clears the box
 		self.nameEnt.delete(0, tk.END)
 
 	def submit(self):
@@ -30,19 +32,26 @@ class Home(tk.Frame):
 		query = """SELECT * FROM students"""
 		cursor.execute(query)
 		names = cursor.fetchall()
+
 		print(names)
 
 		self.buttons = []
 
-		if len(names) >= 10:
-			for i in range(0,4):
-				self.buttons.append(tk.Button(self, text = names[0][1], command = lambda: self.nameSelect(names[0][0])))
+		if len(names) <= 10:
+			for i in len(names):
+				name = names[i][1]
+				print(name)
+				self.buttons[i] = tk.Button(self, text = name, command = lambda: self.nameSelect(names[i][0]))
+				self.buttons[i].grid(row=2+i, column = 0)
+		else:
+			for i in range(0,9):
+				name = names[i][1]
+				ID = names[i][0]
+				print(i,names[i][0], name)
+				self.buttons.append(tk.Button(self, text = name, command = lambda ID = ID: self.nameSelect(ID), width = 20))
+				self.buttons[i].grid(row=2+i, column = 0, columnspan=2)
 
-		'''query = """SELECT * FROM students WHERE name = ?; """
 
-		cursor.execute(query, (criteria,))
-		names = cursor.fetchall()
-		print(names)'''
 
 	def nameSelect(self, studentID):
 		print(studentID)
