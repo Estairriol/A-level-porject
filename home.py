@@ -14,35 +14,39 @@ class Home(tk.Frame):
 		self.nameEnt.grid(row=1, column=0)
 		self.nameEnt.bind("<FocusIn>", self.clear)#clears the box when clicked on
 
-		self.clearBtn = tk.Button(self, text="Clear", command=self.clear)
+		self.clearBtn = tk.Button(self, text="Clear", command=self.clear) #clears the cell
 		self.clearBtn.grid(row=1, column=1, sticky="e")
 
-		self.submit()
+		self.bind("<KeyPress>", self.submit)
+
+		self.submit(True)
 	
 	def clear(self, e=None): #clears the box
 		self.nameEnt.delete(0, tk.END)
 
-	def submit(self):
+	def submit(self, firstTime = False):
 		criteria = self.nameEnt.get()
+		if firstTime:
+			criteria = ""
+		
 		print(criteria)
 
 		with sqlite3.connect("data/data.db") as db: #this allows me to connect to the database
 			cursor = db.cursor() #this cursor will be used to query the database
 
-		query = """SELECT * FROM students"""
+		query = """SELECT * FROM students WHERE name"""(
 		cursor.execute(query)
 		names = cursor.fetchall()
-
-		print(names)
 
 		self.buttons = []
 
 		if len(names) <= 10:
 			for i in len(names):
 				name = names[i][1]
-				print(name)
-				self.buttons[i] = tk.Button(self, text = name, command = lambda: self.nameSelect(names[i][0]))
-				self.buttons[i].grid(row=2+i, column = 0)
+				ID = names[i][0]
+				print(i,names[i][0], name)
+				self.buttons.append(tk.Button(self, text = name, command = lambda ID = ID: self.nameSelect(ID), width = 20))
+				self.buttons[i].grid(row=2+i, column = 0, columnspan=2)
 		else:
 			for i in range(0,9):
 				name = names[i][1]
