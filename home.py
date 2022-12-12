@@ -27,8 +27,22 @@ class Home(tk.Frame):
 		with sqlite3.connect("data/data.db") as db: #this allows me to connect to the database
 			cursor = db.cursor() #this cursor will be used to query the database
 
-		query = """SELECT * FROM students WHERE name = ?; """
+		query = """SELECT * FROM students"""
+		cursor.execute(query)
+		names = cursor.fetchall()
+		print(names)
+
+		self.buttons = []
+
+		if len(names) >= 10:
+			for i in range(0,4):
+				self.buttons.append(tk.Button(self, text = names[0][1], command = lambda: self.nameSelect(names[0][0])))
+
+		'''query = """SELECT * FROM students WHERE name = ?; """
 
 		cursor.execute(query, (criteria,))
 		names = cursor.fetchall()
-		print(names)
+		print(names)'''
+
+	def nameSelect(self, studentID):
+		print(studentID)
