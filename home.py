@@ -17,36 +17,37 @@ class Home(tk.Frame):
 		self.clearBtn = tk.Button(self, text="Clear", command=self.clear) #clears the cell
 		self.clearBtn.grid(row=1, column=1, sticky="e")
 
-		self.bind("<KeyPress>", self.submit)
+		self.nameEnt.bind("<KeyPress>", self.submit)
 
-		self.submit(True)
+		self.submit()
 	
 	def clear(self, e=None): #clears the box
 		self.nameEnt.delete(0, tk.END)
 
-	def submit(self, firstTime = False):
+	def submit(self):
 		criteria = self.nameEnt.get()
-		if firstTime:
-			criteria = ""
 		
 		print(criteria)
+		print("here")
 
 		with sqlite3.connect("data/data.db") as db: #this allows me to connect to the database
 			cursor = db.cursor() #this cursor will be used to query the database
 
-		query = """SELECT * FROM students WHERE name"""(
-		cursor.execute(query)
+		query = """ SELECT * FROM students WHERE name = ? """ # compares database with name entered ignoring case and other words in database
+		cursor.execute(query, (criteria,))
 		names = cursor.fetchall()
+		print(names)
 
-		self.buttons = []
+		self.buttons = [] #this is a list of all the buttons relating to students
 
-		if len(names) <= 10:
-			for i in len(names):
+		if len(names) <= 10: #so that no more than 10 names are displayed
+			print("also here")
+			for i in range(0, len(names)): #iterates through al of the names researched
 				name = names[i][1]
 				ID = names[i][0]
-				print(i,names[i][0], name)
-				self.buttons.append(tk.Button(self, text = name, command = lambda ID = ID: self.nameSelect(ID), width = 20))
-				self.buttons[i].grid(row=2+i, column = 0, columnspan=2)
+
+				self.buttons.append(tk.Button(self, text = name, command = lambda ID = ID: self.nameSelect(ID), width = 20)) #adds the button and binds command
+				self.buttons[i].grid(row=2+i, column = 0, columnspan=2) #places the button
 		else:
 			for i in range(0,9):
 				name = names[i][1]
