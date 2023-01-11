@@ -1,5 +1,4 @@
 import tkinter as tk
-from home import Home
 
 class Menu(tk.Menu):
 	def __init__(self, manager):

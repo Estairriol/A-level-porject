@@ -1,4 +1,4 @@
-import tkinter as tk, sys, os, time, sqlite3 #not all of these are used yet but they are universal to the project and so are imported in all files
+import tkinter as tk, sqlite3
 
 class Home(tk.Frame):
 	def __init__(self, manager):
