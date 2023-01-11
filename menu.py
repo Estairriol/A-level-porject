@@ -6,3 +6,4 @@ class Menu(tk.Menu):
 		tk.Menu.__init__(self, manager)
 		
 		self.add_command(label = "Home", command = manager.goHome)
+		self.add_command(label = "Logout", command = manager.logOut)

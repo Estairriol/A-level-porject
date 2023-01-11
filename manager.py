@@ -45,3 +45,8 @@ class Manager(tk.Tk): #this manages all of the pages
 	
 	def goHome(self):
 		self.switchPage(Home)#this is so that the menu can use this method to switch windows
+
+	def logOut(self): #logs out when the logout button is pressed, resets all values to original
+		self.loggedIn = False
+		self.user = None
+		self.switchPage(Login) #we want to allow the next user to log in
